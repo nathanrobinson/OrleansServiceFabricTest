@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
-using NewOrleans.Configuration;
 using NewOrleans.Implementations;
 using NewOrleans.Tasks;
 using Orleans;
+using Orleans.Configuration;
 using Orleans.Hosting;
 using Orleans.Hosting.ServiceFabric;
 
@@ -74,13 +74,12 @@ namespace NewOrleans
                     // Add your application assemblies.
                     builder.ConfigureApplicationParts(parts =>
                     {
-                        parts.AddApplicationPart(typeof(CalculatorGrain).Assembly).WithReferences();
+                        //parts.AddApplicationPart(typeof(CalculatorGrain).Assembly).WithReferences();
 
                         // Alternative: add all loadable assemblies in the current base path
                         // (see AppDomain.BaseDirectory).
                         parts.AddFromApplicationBaseDirectory();
                     });
-                    builder.Build();
                 });
 
             return new[] {listener};

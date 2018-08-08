@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Grains.Interfaces;
 using Orleans;
 
@@ -6,7 +7,7 @@ namespace NewOrleans.Implementations
 {
     public class CalculatorGrain : Grain, ICalculatorGrain
     {
-        private readonly GrainObserverManager<ICalculatorObserver> _observers = new GrainObserverManager<ICalculatorObserver>();
+        private readonly GrainObserverManager<ICalculatorObserver> _observers = new GrainObserverManager<ICalculatorObserver> { ExpirationDuration = TimeSpan.FromMinutes(5) };
         private double _current;
 
         public Task<double> Add(double value)
@@ -52,7 +53,7 @@ namespace NewOrleans.Implementations
         public Task Subscribe(ICalculatorObserver observer)
         {
             _observers.Subscribe(observer);
-            return Task.FromResult(0);
+            return Task.CompletedTask;
         }
     }
 }

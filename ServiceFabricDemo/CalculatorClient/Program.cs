@@ -105,7 +105,7 @@ namespace CalculatorClient
             {
                 try
                 {
-                    await Task.Delay(TimeSpan.FromSeconds(5), token);
+                    await Task.Delay(TimeSpan.FromMinutes(5), token);
                     await grain.Subscribe(observer);
                 }
                 catch (Exception exception)
